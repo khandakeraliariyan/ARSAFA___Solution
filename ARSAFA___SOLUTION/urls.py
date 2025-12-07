@@ -29,5 +29,4 @@ urlpatterns = [
     path('employees/', include('employees.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('notes/', include('notes.urls')),
-    path('', RedirectView.as_view(url='/login/', permanent=False)),
 ] 
