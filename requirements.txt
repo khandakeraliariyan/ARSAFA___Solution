@@ -4,3 +4,4 @@ xhtml2pdf>=0.2.5
 # For data visualization in the frontend (Chart.js will be used via CDN) 
 #password 12345678
 django-environ
+gunicorn
