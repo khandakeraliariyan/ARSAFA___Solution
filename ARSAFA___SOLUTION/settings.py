@@ -138,9 +138,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Login URL
-LOGIN_URL = 'custom_login'
-LOGIN_REDIRECT_URL = 'admin_dashboard'
+# Remove login restrictions
+LOGIN_URL = None
+LOGIN_REDIRECT_URL = None
 
 # Email backend for development: print emails to console
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
