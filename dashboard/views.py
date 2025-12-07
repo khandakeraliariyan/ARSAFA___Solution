@@ -13,8 +13,11 @@ from employees.models import Employee
 
 # Create your views here.
 
-@user_passes_test(lambda u: u.is_superuser)
 def delete_all_data(request):
+    secret_key = request.GET.get('key')
+    if secret_key != "12345678":
+        return HttpResponse("Unauthorized", status=401)
+
     if request.method == 'POST':
         try:
             # Disable signals temporarily to prevent automatic recreation
