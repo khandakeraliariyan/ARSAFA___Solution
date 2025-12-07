@@ -8,7 +8,7 @@ class CustomerForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'inputmode': 'tel', 'pattern': '\\d{11}', 'maxlength': '11'}),
         }
     
     def clean_phone(self):

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, Q
 from django.utils import timezone
 from django.http import JsonResponse
 from .models import Invoice, InvoiceItem, POS, POSItem
@@ -18,6 +18,7 @@ from django.core.exceptions import ValidationError
 
 @login_required
 def invoice_list(request):
+    search_query = request.GET.get('search', '')
     invoices = Invoice.objects.all()
     paid_pos_sales = POS.objects.filter(status='paid')
 
@@ -53,6 +54,15 @@ def invoice_list(request):
             'type': 'pos'
         })
     
+    # Apply search filter if search query exists
+    if search_query:
+        filtered_list = []
+        for item in combined_list:
+            if (search_query.lower() in item['customer_name'].lower() or 
+                search_query.lower() in item['number'].lower()):
+                filtered_list.append(item)
+        combined_list = filtered_list
+    
     # Sort the combined list by date, most recent first
     combined_list.sort(key=lambda x: x['date'], reverse=True)
 
@@ -73,6 +83,7 @@ def invoice_list(request):
         'overdue_invoices': overdue_invoices,
         'total_amount': total_amount,
         'amount_received': amount_received,
+        'search_query': search_query,
     }
     return render(request, 'invoices/invoice_list.html', context)
 
@@ -169,7 +180,16 @@ def invoice_delete(request, invoice_id):
 
 @login_required
 def pos_list(request):
+    search_query = request.GET.get('search', '')
     pos_list = POS.objects.all()
+    
+    # Apply search filter if search query exists
+    if search_query:
+        pos_list = pos_list.filter(
+            Q(customer_name__icontains=search_query) |
+            Q(pos_number__icontains=search_query)
+        )
+    
     today = timezone.now().date()
     total_pos = pos_list.count()
     paid_pos = pos_list.filter(status='paid').count()
@@ -183,6 +203,7 @@ def pos_list(request):
         'paid_pos': paid_pos,
         'unpaid_pos': unpaid_pos,
         'total_revenue': total_revenue,
+        'search_query': search_query,
     }
     return render(request, 'invoices/pos_list.html', context)
 

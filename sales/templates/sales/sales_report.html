@@ -381,6 +381,67 @@
         line-height: 1.6;
     }
     
+    /* Inventory stat-card style from admin_dashboard.html */
+    .stat-card {
+        background-color: #fff;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        padding: 0.75rem;
+        height: 100%;
+        text-align: center;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    .stat-card .icon {
+        font-size: 1.5rem;
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        border-radius: 50%;
+        color: #fff;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+    .stat-card .label {
+        font-size: 0.8rem;
+        color: #0f1011;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: 400;
+    }
+    .stat-card .value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        display: block;
+        margin-top: 8px;
+        text-align: center;
+    }
+    .stat-card small {
+        display: block;
+        margin-top: 7px;
+        font-weight: 500;
+    }
+    .stat-card small .paid {
+        color: #27ae60;
+    }
+    .stat-card small .unpaid {
+        color: #e74c3c;
+    }
+    /* Remove/override old .stats-card styles to avoid conflicts */
+    .stats-card, .stats-card.featured, .stats-card .stats-icon, .stats-card .stats-value, .stats-card .stats-label {
+        all: unset;
+    }
+    
     @media (max-width: 768px) {
         .dashboard-title {
             font-size: 2rem;
@@ -411,7 +472,7 @@
         <div class="dashboard-header fade-in">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h1 class="dashboard-title"><pre>   Sales Analytics Dashboard</pre></h1>
+                    <h2 class="dashboard-title">Sales Analytics Dashboard</h2>
                     <p class="dashboard-subtitle">
                         {% if selected_period == '1' %}
                             Today's comprehensive insights into your business performance
@@ -442,39 +503,39 @@
         <!-- Summary Cards -->
         <div class="row fade-in">
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="stats-card pulse featured">
-                    <div class="stats-icon primary">
-                        <i class="fas fa-dollar-sign"></i>
+                <div class="stat-card" style="border:none;">
+                    <div>
+                        <div class="icon bg-success"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="label">Total Sales</div>
                     </div>
-                    <div class="stats-value" style="color: #000000; font-size: 2.4rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">৳{{ total_sales|floatformat:2 }}</div>
-                    <div class="stats-label">Total Sales</div>
+                    <div class="value">৳{{ total_sales|floatformat:2 }}</div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="stats-card pulse">
-                    <div class="stats-icon success">
-                        <i class="fas fa-shopping-cart"></i>
+                <div class="stat-card">
+                    <div>
+                        <div class="icon bg-warning"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="label">Total Orders</div>
                     </div>
-                    <div class="stats-value">{{ total_orders }}</div>
-                    <div class="stats-label">Total Orders</div>
+                    <div class="value">{{ total_orders }}</div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="stats-card pulse">
-                    <div class="stats-icon info">
-                        <i class="fas fa-money-bill-wave"></i>
+                <div class="stat-card">
+                    <div>
+                        <div class="icon bg-info"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="label">Paid Amount</div>
                     </div>
-                    <div class="stats-value">৳{{ paid_pos_total|floatformat:2 }}</div>
-                    <div class="stats-label">Paid Amount</div>
+                    <div class="value">৳{{ paid_pos_total|floatformat:2 }}</div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="stats-card pulse">
-                    <div class="stats-icon warning">
-                        <i class="fas fa-money-check-alt"></i>
+                <div class="stat-card">
+                    <div>
+                        <div class="icon bg-danger"><i class="fas fa-money-check-alt"></i></div>
+                        <div class="label">Due Amount</div>
                     </div>
-                    <div class="stats-value">৳{{ unpaid_pos_total|floatformat:2 }}</div>
-                    <div class="stats-label">Unpaid Amount</div>
+                    <div class="value">৳{{ unpaid_pos_total|floatformat:2 }}</div>
                 </div>
             </div>
         </div>

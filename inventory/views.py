@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Product
 from .forms import ProductForm
-from datetime import timedelta
+from datetime import timedelta, date
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
 
@@ -64,7 +64,8 @@ def product_create(request):
             form.save()
             return redirect('product_list')
     else:
-        form = ProductForm()
+        # Set current date as default for input_date
+        form = ProductForm(initial={'input_date': date.today()})
     return render(request, 'inventory/product_form.html', {'form': form})
 
 @login_required

@@ -6,9 +6,10 @@
 
 <style>
     .inventory-dashboard {
-        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        background-color: #e7eaf6;
         min-height: 100vh;
-        padding: 20px 0;
+        padding: 20px 7px;
+        border-radius: 10px;
     }
     
     .dashboard-header {
@@ -25,7 +26,7 @@
         color: #2d3748;
         font-size: 2.5rem;
         font-weight: 700;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         background: linear-gradient(135deg, #4a5568, #2d3748);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -40,43 +41,32 @@
     }
     
     .stats-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 25px;
-        margin-bottom: 25px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: #fff;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .stats-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #4a5568, #2d3748);
+        padding: 0.75rem;
+        height: 100%;
+        text-align: center;
     }
     
     .stats-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     }
     
     .stats-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.8rem;
-        color: white;
-        margin-bottom: 15px;
+        font-size: 1.5rem;
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        border-radius: 50%;
+        color: #fff;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
     }
     
     .stats-icon.primary {
@@ -96,20 +86,23 @@
     }
     
     .stats-value {
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: #000000;
-        margin-bottom: 5px;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        line-height: 1.2;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        display: block;
+        margin-top: 8px;
+        text-align: center;
     }
     
     .stats-label {
-        color: #4a5568;
-        font-size: 0.9rem;
-        font-weight: 500;
+        font-size: 0.8rem;
+        color: #0f1011;
+        font-size: 15px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: 400;
     }
     
     .search-card {
@@ -330,7 +323,7 @@
         background-color: #dc3545 !important;
         color: #fff !important;
     }
-    /* Remove green background for good/fair stock rows - use normal colors */
+
     .good-stock-row {
         background-color: transparent !important;
         color: inherit !important;
@@ -367,7 +360,7 @@
         <div class="dashboard-header fade-in">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h1 class="dashboard-title"><pre>   Inventory Management</pre></h1>
+                    <h1 class="dashboard-title">Inventory Management</h1>
                     <p class="dashboard-subtitle">Manage your product inventory with real-time insights and analytics</p>
                 </div>
                 <div class="col-md-4 text-end">
@@ -382,39 +375,47 @@
 
         <div class="row mb-4 fade-in">
 
-            {% comment %} low stock  {% endcomment %}
+            <!-- Low Stock -->
             <div class="col-md-3 mb-3">
-                <div class="stats-card text-center">
-                    <div class="stats-icon danger"><i class="fas fa-box-open"></i></div>
+                <div class="stats-card">
+                    <div>
+                        <div class="stats-icon danger"><i class="fas fa-box-open"></i></div>
+                        <div class="stats-label">Low Stock</div>
+                    </div>
                     <div class="stats-value">{{ low_stock_count }}</div>
-                    <div class="stats-label">Low Stock</div>
                 </div>
             </div>
 
-            {% comment %} nearly expire {% endcomment %}
+            <!-- Nearly Expire -->
             <div class="col-md-3 mb-3">
-                <div class="stats-card text-center">
-                    <div class="stats-icon warning"><i class="fas fa-hourglass-half"></i></div>
+                <div class="stats-card">
+                    <div>
+                        <div class="stats-icon warning"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="stats-label">Nearly Expire</div>
+                    </div>
                     <div class="stats-value">{{ nearly_expire_count }}</div>
-                    <div class="stats-label">Nearly Expire</div>
                 </div>
             </div>
 
-            {% comment %} total product {% endcomment %}
+            <!-- Total Product -->
             <div class="col-md-3 mb-3">
-                <div class="stats-card text-center">
-                    <div class="stats-icon primary"><i class="fas fa-cubes"></i></div>
+                <div class="stats-card">
+                    <div>
+                        <div class="stats-icon primary"><i class="fas fa-cubes"></i></div>
+                        <div class="stats-label">Total Product</div>
+                    </div>
                     <div class="stats-value">{{ total_product_count }}</div>
-                    <div class="stats-label">Total Product</div>
                 </div>
             </div>
-            
-            {% comment %} total price {% endcomment %}
+
+            <!-- Total Price -->
             <div class="col-md-3 mb-3">
-                <div class="stats-card text-center">
-                    <div class="stats-icon success"><i class="fas fa-coins"></i></div>
-                    <div class="stats-value">৳{{ total_price|floatformat:2 }}</div>
-                    <div class="stats-label">Total Price</div>
+                <div class="stats-card">
+                    <div>
+                        <div class="stats-icon success"><i class="fas fa-coins"></i></div>
+                        <div class="stats-label">Total Price</div>
+                    </div>
+                    <div class="stats-value">৳ {{ total_price|floatformat:2 }}</div>
                 </div>
             </div>
 

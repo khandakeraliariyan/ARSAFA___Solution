@@ -7,10 +7,10 @@ class EmployeeForm(forms.ModelForm):
         fields = ['name', 'nid', 'designation', 'phone', 'salary', 'joining_date']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'nid': forms.TextInput(attrs={'class': 'form-control'}),
+            'nid': forms.TextInput(attrs={'class': 'form-control', 'inputmode': 'numeric', 'pattern': '\\d{10}', 'maxlength': '10'}),
             'designation': forms.TextInput(attrs={'class': 'form-control'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control'}),
-            'salary': forms.NumberInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'inputmode': 'tel', 'pattern': '\\d{11}', 'maxlength': '11'}),
+            'salary': forms.NumberInput(attrs={'class': 'form-control', 'min': '0', 'step': '0.01'}),
             'joining_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
     
@@ -31,4 +31,13 @@ class EmployeeForm(forms.ModelForm):
             # Check if NID contains only digits
             if not nid.isdigit():
                 raise forms.ValidationError("NID must contain only digits.")
+            # Enforce exactly 10 digits
+            if len(nid) != 10:
+                raise forms.ValidationError("NID must be exactly 10 digits long.")
         return nid 
+
+    def clean_salary(self):
+        salary = self.cleaned_data.get('salary')
+        if salary is not None and salary < 0:
+            raise forms.ValidationError("Salary cannot be negative.")
+        return salary

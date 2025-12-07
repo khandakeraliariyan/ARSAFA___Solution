@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Customer
 from .forms import CustomerForm
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import IntegrityError
@@ -13,8 +13,18 @@ from lending.models import Lending
 
 @login_required
 def customer_dashboard(request):
-    total_customers = Customer.objects.count()
+    search_query = request.GET.get('search', '')
     customers = Customer.objects.all().order_by('-last_purchase')
+    
+    # Apply search filter if search query exists
+    if search_query:
+        customers = customers.filter(
+            Q(name__icontains=search_query) |
+            Q(email__icontains=search_query) |
+            Q(phone__icontains=search_query)
+        )
+    
+    total_customers = customers.count()
     
     # Calculate total sales and outstanding balance for all customers
     total_sales = 0
@@ -54,6 +64,7 @@ def customer_dashboard(request):
         'total_sales': total_sales,
         'outstanding_balance': outstanding_balance,
         'customers': customers,
+        'search_query': search_query,
     }
     return render(request, 'customers/customers_dashboard.html', context)
 

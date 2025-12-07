@@ -1,55 +1,57 @@
 # ARSAFA SOLUTION
 
-A Django-based ERP system for small and medium businesses, featuring admin login, inventory tracking, sales, POS, invoicing, customer management, lending, employee management, email reminders, and analytics dashboard.
+A complete business management system built with Django for small and medium businesses. It helps manage daily tasks such as inventory, sales, POS, invoices, customers, employees, lending, repayment reminders, business notes, and barcode scanning — all in one place.
 
 ---
 
 ## Features
 
-- **Admin Dashboard**: Centralized overview of sales, inventory, invoices, and key metrics.
-- **Inventory Management**: Track products, categories, stock levels, expiry dates, and low stock alerts.
-- **Sales & POS**: Manage sales, POS transactions (paid/unpaid), and daily/weekly sales analytics.
-- **Invoicing**: Create, edit, and track invoices with payment status and due dates.
-- **Customer Management**: Store customer info, purchase history, outstanding balances, and activity logs.
-- **Lending Module**: Track loans to customers, interest rates, due dates, and repayment status.
-- **Employee Info**: Manage employee records and access.
-- **Notes**: Take, view, update, and delete personal notes. Accessible from all pages via the navigation bar and dashboard quick access.
-- **Data Visualization**: Sales and inventory analytics using Chart.js (via CDN).
-- **Email Reminders**: (Planned) Send reminders for overdue invoices and lending.
-- **Data Management**: Admin commands to clear/reset data for testing or new deployments.
+- **Admin Dashboard**: Get a quick overview of sales, inventory, low stock & nearly expiry alerts, and other key business stats in one place
+- **Inventory Management**: Add, modify, search, and organize products by category, monitor stock levels, track expiry dates, and check total inventory valuation.
+- **Sales & POS**: Handle sales and POS transactions (both paid and unpaid), with access to complete sales history.
+- **Invoicing**: Easily create, edit, and track invoices with payment status and due dates.
+- **Customer Management**: Keep customer details, purchase history, total sales, and activity records organized. This will help us to implement the loyalty program later on.
+- **Employee Management**: Store and manage employee details, roles, and system access.
+- **Lending Module**: Manage customer loans, including interest rates, repayment schedules, and due dates.
+- **Email Reminders**: Automatically send reminders for overdue invoices and unpaid loans.
+- **Notes**: Create, edit, and delete personal notes, accessible from both the navigation bar and dashboard quick links.
+- **Barcode Scanner**: Quickly add products to inventory or select them at POS using barcode scanning.
+- **Sales & Reporting**: Visualize sales and inventory insights with interactive charts powered by Chart.js (via CDN).
+- **Data Management**: Use admin commands to clear/reset data for testing or new deployments.
 
 ---
 
 ## Detailed Feature Overview
 
 ### 1. Admin Dashboard
-- **Centralized Overview:** See key business metrics at a glance: today’s sales, low stock items, pending invoices, credit balances, and recent activities.
+- **Centralized Overview:** View today’s sales, customer credit balances, low stock alerts, nearly expiring products and navigation bar — all in one place.
 - **Quick Navigation:** Access all major modules (Inventory, Sales, POS, Invoices, Customers, Lending, Employees) from dashboard cards.
-- **Recent Activities Feed:** Instantly view the latest actions (new invoices, payments, stock updates, new customers) for fast decision-making.
+- **Alerts:** Alert notification will appear for low stock & nearly expiring producs.
 - **Data Reset:** Admins can clear all business data (for testing or new deployments) with a single action.
+
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/ad4dc7a55f519e18de2480e1713794823a189d25/readme-assets/admin-dashboard.png)
 
 ### 2. Inventory Management
 - **Product Catalog:** Add, edit, and delete products with details like name, category, quantity, unit price, buying price, expiry date, input date, and barcode.
-- **Search, Filter, and Sort:** Find products quickly by name, category, or sort by price, expiry, or stock level.
+- **Search, Filter, and Sort:** Find products quickly by name, category etc. and sort by price, expiry, or stock level etc.
 - **Low Stock Alerts:** Products below a configurable quantity threshold are highlighted and counted, helping prevent stockouts.
-- **Expiry Alerts:** Products nearing expiry (within 7 days) are flagged for timely action.
-- **Bulk Operations:** Use management commands to add random products or update product statuses in bulk.
-- **Admin Panel Integration:** Manage products via Django admin with advanced search and filtering.
+- **Expiry Alerts:** Products nearing expiry (within 7 days) are flagged for timely action. They appears in red color for better visibility.
+
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/739e6b1090248d682cea1182ef302f2fdcdc89f7/readme-assets/inventory.png)
 
 ### 3. Sales & POS (Point of Sale)
-- **Sales Analytics Dashboard:** Visualize total sales, orders, paid/unpaid amounts, daily/weekly sales trends, and top-selling products.
 - **POS Transactions:** Create and manage sales directly at the point of sale, supporting both paid and unpaid transactions.
 - **Order Management:** Track all sales and POS orders, including detailed product breakdowns and customer associations.
-- **Top Products & Trends:** Identify best-selling products and monitor sales growth with interactive charts.
-- **Test Data Management:** Easily clear sales data for testing or demonstration purposes.
+
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/739e6b1090248d682cea1182ef302f2fdcdc89f7/readme-assets/POS.png)
 
 ### 4. Invoicing
-- **Invoice List & Filtering:** View all invoices (manual and POS-generated), filter by status (paid, unpaid, overdue), and search by customer or number.
-- **Create/Edit Invoices:** Generate invoices for customers, set due dates, and update details as needed.
+- **Invoice List & Filtering:** View all invoices (manual and POS-generated), and search by customer or POS number.
+- **Create/Edit Invoices:** Generate invoices for customers, set due dates, and update details if needed.
 - **POS Integration:** POS transactions automatically generate corresponding invoices for seamless accounting.
-- **Payment Tracking:** Mark invoices as paid/unpaid, update statuses, and track due dates to manage cash flow.
-- **API Endpoints:** Fetch product prices and details by barcode for fast POS operations.
-- **Bulk Deletion:** Use management commands to clear invoice data in bulk.
+- **Payment Tracking:** Mark invoices as paid/due, update statuses, and track due dates to manage cash flow.
+
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/739e6b1090248d682cea1182ef302f2fdcdc89f7/readme-assets/invoice.png)
 
 ### 5. Customer Management
 - **Customer Directory:** Add, edit, and delete customer records with contact info, purchase history, and outstanding balances.
@@ -58,33 +60,43 @@ A Django-based ERP system for small and medium businesses, featuring admin login
 - **Activity Log:** Track each customer’s last purchase date and total purchases.
 - **Data Integrity Tools:** Management commands to check, fix, or clear customer data, ensuring accuracy.
 
-### 6. Lending Module
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/739e6b1090248d682cea1182ef302f2fdcdc89f7/readme-assets/customer.png)
+
+### 6. Employee Management
+- **Employee Records:** Maintain employee details including name, NID, role, phone, salary, and joining date etc.
+- **Admin Integration:** Manage employees through Django Admin with full CRUD support.
+
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/739e6b1090248d682cea1182ef302f2fdcdc89f7/readme-assets/employee.png)
+
+### 7. Lending Management
 - **Lending Dashboard:** Overview of all lending records, including active, repaid, and overdue loans.
 - **Add/Edit Lending Records:** Create or update loans for customers, set interest rates, due dates, and add notes.
 - **Repayment & Overdue Tracking:** Mark loans as repaid or overdue, and monitor outstanding amounts.
 - **Auto-Lending:** Unpaid POS transactions automatically create or update lending records for the customer.
 - **Cleanup & Verification:** Management commands to clean up or verify lending records based on unpaid POS bills.
 
-### 7. Employee Management
-- **Employee Directory:** Add, edit, and delete employee records, including name, NID, designation, phone, salary, and joining date.
-- **Admin Panel Integration:** Manage employees via Django admin for advanced control.
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/739e6b1090248d682cea1182ef302f2fdcdc89f7/readme-assets/lending.png)
 
-### 8. Data Visualization
-- **Interactive Charts:** Use Chart.js (via CDN) to visualize sales trends, product performance, and revenue growth.
-- **Summary Cards:** See key metrics in visually appealing cards for quick insights.
+### 8. Email Reminders
+- **Overdue Notifications:** Send automatic emails for overdue invoices and unpaid loans.
 
-### 9. Email Reminders *(Planned/Optional)*
-- **Automated Reminders:** Send email notifications for overdue invoices and lending repayments (planned feature).
-
-### 10. Data Management & Utilities
-- **Management Commands:** Use Django’s command-line tools to add random data, clear/reset modules, and maintain data integrity.
-- **Bulk Operations:** Perform large-scale updates or deletions efficiently for testing or new deployments.
-
-### 11. Notes
+### 9. Notes
 - **Create, View, Edit, Delete Notes:** Add personal notes for reminders, ideas, or tasks. Each note has a title, content, and timestamps.
 - **Table View:** All notes are displayed in a sortable table with quick action icons for view, edit, and delete.
-- **Universal Access:** Access the Notes feature from the main navigation bar or the admin dashboard quick access section.
-- **User-Friendly:** Clean interface for managing notes efficiently alongside other business modules.
+
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/739e6b1090248d682cea1182ef302f2fdcdc89f7/readme-assets/notes.png)
+
+![alt_text](https://github.com/KHANDAKERALIARIYAN/ARSAFA___Solution/blob/739e6b1090248d682cea1182ef302f2fdcdc89f7/readme-assets/view-notes.png)
+
+### 10. Barcode Scanner
+- **Quick Product Entry:** Scan barcodes to add new products directly to inventory, reducing manual entry errors.
+- **Integration with Inventory & Sales:** Automatically links scanned products with existing inventory records and sales modules.
+- **Fast POS Selection:** Select products instantly at the Point of Sale by scanning, making checkout faster and more accurate.
+
+### 11. Sales & Reporting
+- **Interactive Charts:** Visualize sales trends, inventory usage, revenue growth, and top-selling products using Chart.js (via CDN).
+- **Summary Cards:** Display key metrics such as total sales, pending payments, and stock levels in clear, visual cards.
+- **Decision Support:** Helps managers quickly identify performance gaps, best-selling products, and low-stock items.
 
 ---
 

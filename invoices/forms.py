@@ -11,7 +11,7 @@ class POSForm(forms.ModelForm):
         fields = ['customer_name', 'contact_number', 'email']
         widgets = {
             'customer_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'contact_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'contact_number': forms.TextInput(attrs={'class': 'form-control', 'inputmode': 'tel', 'pattern': '\\d{11}', 'maxlength': '11'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
     

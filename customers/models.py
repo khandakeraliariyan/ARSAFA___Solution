@@ -1,11 +1,16 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 # Create your models here.
 
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone = models.CharField(max_length=20, unique=True)
+    phone = models.CharField(
+        max_length=11,
+        unique=True,
+        validators=[RegexValidator(r'^\d{11}$', 'Phone number must be exactly 11 digits.')]
+    )
     outstanding_balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_purchases = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     last_purchase = models.DateField(null=True, blank=True)
