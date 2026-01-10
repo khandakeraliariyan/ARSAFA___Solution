@@ -1,6 +1,5 @@
 {% extends 'accounts/base.html' %}
 {% load static %}
-{% load invoice_tags %}
 
 {% block title %}Invoice {{ invoice.invoice_number }} | ARSAFA SOLUTION{% endblock %}
 
@@ -139,18 +138,9 @@
             <p class="text-muted">Thank you for your business. Please contact us with any questions regarding this invoice.</p>
         </div>
         <div class="totals">
-            <div class="d-flex justify-content-between">
-                <span class="text-muted">Subtotal:</span>
-                <span>৳{{ invoice.amount|floatformat:2 }}</span>
-            </div>
-            <div class="d-flex justify-content-between">
-                <span class="text-muted">VAT (5%):</span>
-                <span>৳{{ invoice.amount|multiply:0.05|floatformat:2 }}</span>
-            </div>
-            <hr>
             <div class="d-flex justify-content-between h4">
                 <span class="fw-bold">Total:</span>
-                <span class="fw-bold">৳{{ invoice.amount|multiply:1.05|floatformat:2 }}</span>
+                <span class="fw-bold">৳{{ invoice.amount|floatformat:2 }}</span>
             </div>
         </div>
     </div>
